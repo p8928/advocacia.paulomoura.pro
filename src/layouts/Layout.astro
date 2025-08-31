@@ -1,0 +1,66 @@
+---
+import '../styles/global.css';
+
+const { title } = Astro.props;
+---
+<!doctype html>
+<html lang="pt-BR">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="icon" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="robots" content="noindex, nofollow">
+		<link rel="preload" href="/fonts/ortica/OrticaLinear-Regular.woff2" as="font" type="font/woff2" crossorigin>
+		<link rel="preload" href="/fonts/outfit/outfit-v14-latin-100.woff2" as="font" type="font/woff2" crossorigin>
+		<link rel="preload" href="/fonts/outfit/outfit-v14-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+		<link rel="preconnect" href="https://formspree.io">
+		<title>{title}</title>
+		
+		<style is:inline>
+			/* Inlining critical font definitions to improve LCP */
+			@font-face {
+			  font-display: swap;
+			  font-family: 'Ortica';
+			  font-style: normal;
+			  font-weight: 400;
+			  src: url('/fonts/ortica/OrticaLinear-Regular.woff2') format('woff2');
+			}
+			@font-face {
+			  font-display: swap;
+			  font-family: 'Outfit';
+			  font-style: normal;
+			  font-weight: 100;
+			  src: url('/fonts/outfit/outfit-v14-latin-100.woff2') format('woff2');
+			}
+		</style>
+
+		<script src="/js/alpine.min.js" defer></script>
+	</head>
+	<body>
+		<div id="preloader" class="preloader">
+			<div class="preloader-content">
+				<h2 class="font-serif text-2xl text-brand-primary/80 preloader-fade-in" style="animation-delay: 0.2s;">M&B</h2>
+				<p class="font-serif text-sm text-brand-primary/70 preloader-fade-in" style="animation-delay: 0.5s;">Advocacia Trabalhista</p>
+				<div class="preloader-line-container mt-6">
+				  <div class="preloader-line-left"></div>
+				  <div class="preloader-line-right"></div>
+				</div>
+			</div>
+		</div>
+		<slot />
+
+		<script>
+			// Main logic to run when the page is fully loaded
+			window.addEventListener('load', () => {
+				const preloader = document.getElementById('preloader');
+				if (preloader) {
+					setTimeout(() => {
+						preloader.classList.add('preloader-hidden');
+					}, 500);
+				}
+			});
+		</script>
+	</body>
+</html>
